@@ -2,26 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lab6Zad4 : MonoBehaviour //rozpoczęte nie skończone
+public class Lab6Zad4 : MonoBehaviour
 {
-    public GameObject player;
-    Vector3 direction;
-    public float force = 5f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        direction = transform.TransformDirection(Vector3.up * force);
-    }
+    public GameObject gracz;
+    private Vector3 playerBounce;
+    public float bounceForce = 5.0f;
+    public float gravityValue = -9.81f;
 
-    private void OnTriggerEnter(Collider other)
+    // Start is called before the first frame update
+    void Start()
     {
         
-        if (other.gameObject.CompareTag("Player")) 
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Wybija");
-            player = other.gameObject;
-            player.GetComponent<Rigidbody>().AddForce(direction, ForceMode.Impulse);
+            Debug.Log("KOLIZJA");
+            playerBounce.y += Mathf.Sqrt(bounceForce * -10.0f * gravityValue);
+            gracz.GetComponent<CharacterController>().Move(playerBounce * Time.deltaTime);
         }
     }
 }
+
