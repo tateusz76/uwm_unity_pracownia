@@ -118,7 +118,7 @@ public class EnemyController2D : MonoBehaviour
 
     public void MoveToPlayer(float move)
     {
-        transform.position = Vector2.MoveTowards(transform.position, playerCheck.transform.position, 3.0f * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, gracz.transform.position, 3.0f * Time.deltaTime);
 
         // If the input is moving the player right and the player is facing left...
         if (move > 0 && !m_FacingRight)
